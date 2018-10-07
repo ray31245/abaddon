@@ -1,0 +1,164 @@
+/* Text Elements */
+
+h1 span.heading-text-1 {
+  color: #fcf7f7;
+  text-decoration: underline;
+  text-transform: none;
+  font-size: 19px;
+  font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+}
+
+h1.heading-1 {
+  background-color: #491ca1;
+  text-align: left;
+  text-indent: 0;
+  word-spacing: 0;
+}
+
+h1.heading-3 {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0;
+  font-weight: 800;
+  font-style: normal;
+  font-variant: normal;
+  font-size: 32px;
+  font-family: 'Brush Script MT', cursive;
+  -webkit-column-span: none;
+     -moz-column-span: none;
+          column-span: none;
+}
+
+h3.heading-2 {
+  font-size: 20px;
+}
+
+/* Layout Elements */
+
+body > .row > [class*='col-xs-'].column-1 {
+  padding-right: 17px;
+  padding-left: 0;
+}
+
+body > .row.row-1 {
+  max-width: 1200px;
+}
+
+body > .row > [class*='col-xs-'].column-2 {
+  box-shadow: none;
+}
+
+body > .row > [class*='col-xs-'].column-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display:    -moz-box;
+  display: -ms-flexbox;
+  display:         flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: start;
+  float: left;
+  clear: none;
+  -ms-flex-align: stretch;
+  padding-left: 0;
+
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+     -moz-box-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+          align-content: stretch;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+     -moz-box-align: stretch;
+          align-items: stretch;
+}
+
+body > .row.row-2 {
+  max-width: 1200px;
+}
+
+div.responsive-picture.picture-1 {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 100%;
+}
+
+a.responsive-picture.picture-link-1 {
+  max-width: 100%;
+}
+
+a.responsive-picture.picture-link-3 {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 200px;
+
+  -webkit-align-self: baseline;
+  -ms-flex-item-align: baseline;
+          align-self: baseline;
+}
+/*
+.container-fluid.prd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display:    -moz-box;
+  display: -ms-flexbox;
+  display:         flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: start;
+  -ms-flex-align: center;
+  padding-right: 0;
+  padding-left: 15px;
+  max-width: 100%;
+  width: 30%;
+  text-align: left;
+
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 30%;
+     -moz-box-flex: 1;
+      -ms-flex: 1 30%;
+          flex: 1 30%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+     -moz-box-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+          align-items: center;
+}*/
+
+@media screen and (min-width: 768px) {
+  /* Layout Elements */
+
+  body > .row.row-3 {
+    max-width: 1200px;
+  }
+
+  .container-fluid.prd {
+    width: 20%;
+
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 20%;
+       -moz-box-flex: 1;
+        -ms-flex: 1 20%;
+            flex: 1 20%;
+  }
+}
