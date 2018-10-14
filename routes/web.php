@@ -54,6 +54,10 @@ Route::group(['prefix'=>'merchandise'],function(){
 
 		Route::put('/','MerchandiseController@merchandiseItemUpdateProcess');
 
+		Route::get('/test','MerchandiseController@test');
+
+		Route::get('/ajax','MerchandiseController@ajax');
+
 	});
 
 		Route::post('/buy','MerchandiseController@merchandiseItemBuyProcess')->middleware(['user.auth']);

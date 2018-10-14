@@ -3,15 +3,15 @@
 @section('title',$title)
 
 @section('content')
-     <div class = "container">
-     	<h1>{{$title}}</h1>
+     <div class = "container merchandise">
+     	<h1 onclick="check()">{{$title}}</h1>
      
 
 @include('components.validationErrorMessage')
 
 <button><a href="/shop_laravel/public/merchandise/manage">回管理商品</a></button>
 
-<form action="/shop_laravel/public/merchandise/{{$Merchandise->id}}" method="post" enctype="multipart/form-data">
+<form action="/shop_laravel/public/merchandise/{{$Merchandise->id}}" method="post" enctype="multipart/form-data" class="update">
 	{{method_field('put')}}
 
 	<label>
@@ -96,4 +96,49 @@
 	{{csrf_field()}}
 </form>
 </div>
+<script type="text/javascript">
+var xmlHttp;
+
+    function $_xmlHttpRequest(){
+      if (window.ActiveObject) {
+        xmlHttp = new ActiveObject("Microsoft.XMLHTTP");
+      }
+      else if (window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();
+      }
+    }
+
+	    function check()
+    {
+    //   var select_op = <?php echo '"'.$Merchandise->introduction_en.'"'; ?>;
+
+			  var status = document.getElementsByClassName("update")[0][1].value;
+			  var class_id = document.getElementsByClassName("update")[0][2].value;
+			  var name = document.getElementsByClassName("update")[0][3].value;
+			  var name_en = document.getElementsByClassName("update").value;
+			  var introduction = document.getElementsByClassName("update").value;
+			  var introduction_en = document.getElementsByClassName("update").value;
+			  var photo = document.getElementsByClassName("update").value;
+			  var price = document.getElementsByClassName("update").value;
+			  var remain_count = document.getElementsByClassName("update".value);
+			  
+      $_xmlHttpRequest();
+      xmlHttp.open("GET","/shop_laravel/public/merchandise/{{$Merchandise->id}}/test?status="+status+"&class_id="+class_id+"&name="+name+"&name_en="+name_en+"&introduction="+introduction+"&introduction_en="+introduction_en+"&photo="+photo+"&price="+price+"&remain_count="+remain_count,true);
+
+         xmlHttp.onreadystatechange = function check_user()
+         {
+          if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+              var str = xmlHttp.responseText;
+			  var update = document.getElementsByClassName("update")[0][1].value;
+
+              document.getElementsByClassName("merchandise")[0].innerHTML= str;
+            //   document.getElementById("cart").disabled = true;
+            }
+          }
+         }
+
+         xmlHttp.send(null);
+    }
+ </script>
 @endsection

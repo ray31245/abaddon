@@ -272,4 +272,68 @@ public function merchandiseFilterListPage($class_id){
 
 
 }
+
+public function test($merchandise_id){
+	$Merchandise = Merchandise::findorFail($merchandise_id);
+
+	$input = request()->all();
+
+	$rules = ['status' =>['required','in:C,S',],
+	          'class_id'=>['in:mobile,car,food',],
+	          'name'  =>['required','max:80',],
+	          'name_en'=>['required','max:80',],
+              'introduction'=>['required','max:2000',],
+              'introduction_en'=>['required','max:2000',],
+              'photo'  =>['file','image','max:10240',],
+              'price'  =>['required','integer','min:0',],
+              'remain_count' =>['required','integer','min:0',],
+	          ];
+	$Validator = Validator::make($input,$rules);
+
+	if($Validator->fails()){
+		return redirect('/merchandise/'.$Merchandise->id.'/ajax')->withErrors($Validator)->withInput();
+	}
+
+	if(isset($input['photo'])){
+		$photo = $input['photo'];
+
+		$file_extension = $photo->getClientOriginalExtension();
+
+		$file_name = uniqid().'.'.$file_extension;
+
+		$file_relative_path = 'images/merchandise/'.$file_name;
+
+		$file_path = public_path($file_relative_path);
+
+		$image = Image::make($photo)->fit(450,300)->save($file_path);
+
+		$input['photo'] = $file_relative_path;
+	}
+
+	$Merchandise->update($input);
+
+	return redirect('/merchandise/'.$Merchandise->id.'/ajax');
+
+	// $binding = [
+	// 'title' => '編輯商品',
+	// 'Merchandise' => $Merchandise,
+	// ];
+
+	// return view('merchandise.test',$binding);
+}
+public function ajax ($merchandise_id)
+{
+
+	$Merchandise = Merchandise::findorFail($merchandise_id);
+	if(!is_null($Merchandise->photo)){
+		$Merchandise -> photo = url($Merchandise ->photo);
+	}
+
+	$binding = [
+	'title' => '編輯商品',
+	'Merchandise' => $Merchandise,
+	];
+
+	return view('merchandise.ajax',$binding);
+}
 }
