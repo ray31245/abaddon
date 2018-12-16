@@ -9,7 +9,9 @@
 
 @include('components.validationErrorMessage')
 
-<button><a href="/shop_laravel/public/merchandise/manage">回管理商品</a></button>
+<h1 onclick="updatecount()">update</h1>
+
+<button id="demo"><a href="/shop_laravel/public/merchandise/manage">回管理商品</a></button>
 
 <form action="/shop_laravel/public/merchandise/{{$Merchandise->id}}" method="post" enctype="multipart/form-data" class="update">
 	{{method_field('put')}}
@@ -108,6 +110,24 @@ var xmlHttp;
       }
     }
 
+	function updatecount(){
+
+		 status = document.getElementsByClassName("update")[0][1].value;
+			   class_id = document.getElementsByClassName("update")[0][2].value;
+			   name = document.getElementsByClassName("update")[0][3].value;
+			   name_en = document.getElementsByClassName("update")[0][4].value;
+			   introduction = document.getElementsByClassName("update")[0][5].value;
+			   introduction_en = document.getElementsByClassName("update")[0][6].value;
+			   photo = document.getElementsByClassName("update")[0][7].value;
+			   price = document.getElementsByClassName("update")[0][8].value;
+			   remain_count = document.getElementsByClassName("update")[0][9].value;
+
+			  var text = '{"product":'+'"'+status+'"'+'}'
+			  var obj = JSON.parse(text);
+			  document.getElementById("demo").innerHTML = obj.product;
+
+	}
+
 	    function check()
     {
     //   var select_op = <?php echo '"'.$Merchandise->introduction_en.'"'; ?>;
@@ -115,12 +135,15 @@ var xmlHttp;
 			  var status = document.getElementsByClassName("update")[0][1].value;
 			  var class_id = document.getElementsByClassName("update")[0][2].value;
 			  var name = document.getElementsByClassName("update")[0][3].value;
-			  var name_en = document.getElementsByClassName("update").value;
-			  var introduction = document.getElementsByClassName("update").value;
-			  var introduction_en = document.getElementsByClassName("update").value;
-			  var photo = document.getElementsByClassName("update").value;
-			  var price = document.getElementsByClassName("update").value;
-			  var remain_count = document.getElementsByClassName("update".value);
+			  var name_en = document.getElementsByClassName("update")[0][4].value;
+			  var introduction = document.getElementsByClassName("update")[0][5].value;
+			  var introduction_en = document.getElementsByClassName("update")[0][6].value;
+			  var photo = document.getElementsByClassName("update")[0][7].value;
+			  var price = document.getElementsByClassName("update")[0][8].value;
+			  var remain_count = document.getElementsByClassName("update")[0][9].value;
+
+			  var text = '{"product":'+status+'}'
+			  var obj = JSON.parse(txt);
 			  
       $_xmlHttpRequest();
       xmlHttp.open("GET","/shop_laravel/public/merchandise/{{$Merchandise->id}}/test?status="+status+"&class_id="+class_id+"&name="+name+"&name_en="+name_en+"&introduction="+introduction+"&introduction_en="+introduction_en+"&photo="+photo+"&price="+price+"&remain_count="+remain_count,true);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\shop\Entity\Merchandise;
 use App\shop\Entity\User;
 use App\shop\Entity\Transaction;
+use App\test\test;
 use Illuminate\Http\Request;
 use Exception;
 use Validator;
@@ -119,6 +120,11 @@ public function merchandiseItemUpdateProcess($merchandise_id){
 }
 public function merchandiseListPage()
 {
+	// $test = test::get()->toArray();
+	// $test = Transaction::get()->toArray();
+	// $test = test::find(4)->ranscaction()->get()->toArray();
+	// $test = Merchandise::findorFail('2');
+	// dd($test);
 	$row_per_page = 10;
 
 	$MerchandisePaginate = Merchandise::OrderBy('updated_at','desc')
@@ -254,6 +260,32 @@ public function merchandiseFilterListPage($class_id){
 
 	$row_per_page = 10;
 
+	// $test = DB::table('transaction')->groupBy('user_id')->get()->toArray();
+
+	// $users = DB::table('users')->get()->toArray();
+
+	// $data = [];
+	// foreach ($users as $key => $users) {
+	// 	array_push($data,$users->id);
+	// }
+    // $data2 = [];
+	// foreach($data as $key => $data1) {
+	// 	$test = Transaction::where('user_id',$key)->orderBy('price')->orderBy('created_at')->first()->get()->toArray();
+	// 	$data2 = array_merge($data2,$test);
+	// }
+
+	// $test = DB::table('transaction')->orderBy('price')->orderBy('created_at')->get()->toArray();
+
+	// $test = DB::table('transaction')
+    //         ->whereIn(function ($query) {
+    //             $query->select(DB::raw(1))
+    //                   ->from('orders')
+    //                   ->whereRaw('orders.user_id = users.id');
+    //         })
+    //         ->get();
+
+	// dd($data2);
+
 	$MerchandisePaginate = Merchandise::OrderBy('updated_at','desc')
 	->where('class_id',$class_id)
 	->paginate($row_per_page);
@@ -273,7 +305,7 @@ public function merchandiseFilterListPage($class_id){
 
 }
 
-public function test($merchandise_id){
+public function test($merchandise_id,request $request){
 	$Merchandise = Merchandise::findorFail($merchandise_id);
 
 	$input = request()->all();

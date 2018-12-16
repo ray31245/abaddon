@@ -77,6 +77,7 @@
     function check()
     {
       var select_op = <?php echo '"'.$Merchandise->introduction_en.'"'; ?>;
+			// history.pushState({page: 1}, 'title 1', 'ajax')
 
       $_xmlHttpRequest();
       xmlHttp.open("GET","/shop_laravel/public/merchandise/{{$Merchandise->id}}/cart_add?Merchandise_id="+select_op+"&buycount="+buy_count,true);

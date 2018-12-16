@@ -7,6 +7,8 @@ use Validator;
 use App\Shop\Entity\User;
 use Hash;
 use Mail;
+use Illuminate\Contracts\Encryption;
+use Illuminate\Support\Facades\Crypt;
 //use Illuminate\Foundation\Validation\ValidatesRequests;
 
 /**
@@ -33,13 +35,13 @@ class UserAuthController extends Controller
 		'type'=>['required','in:G,A']
 		];
 
-		$validator = Validator::make($input,$rules);
+		// $validator = Validator::make($input,$rules);
 
-		if ($validator->fails()){
-			return redirect('/user/auth/sign-up')->withErrors($validator)->withInput();
-		}
+		// if ($validator->fails()){
+		// 	return redirect('/user/auth/sign-up')->withErrors($validator)->withInput();
+		// }
 		$input['password'] = Hash::make($input['password']);
-		$Users = User::create($input);
+		// $Users = User::create($input);
 		// return view('welcome');
 		$mail_binding = [
 		'nickname' => $input['nickname']
@@ -59,6 +61,11 @@ class UserAuthController extends Controller
 	public function signInPage(){
 
 		$binding = ['title'=>'登入'];
+		$user = User::where('id',2)->firstOrFail()->toArray();
+		// dd(json_decode(base64_decode($user['password']),true));
+		// $decrypted = decrypt($user['password']);
+		// $decrypted = Crypt::decryptString($user->password);
+		// dd($decrypted);
 		return view('auth.signIn',$binding);
 	}
 

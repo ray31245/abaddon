@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,40 @@ Route::get('/', function () {
 	$binding = ['title'=>'首頁'];
     return view('welcome',$binding);
 });
+
+Route::post('/submit', function (Request $request) {
+	// $binding = ['title'=>'首頁'];
+
+	$data = $request->all();
+
+	$set = [];
+                        $set['view'] = 'mail.allMailBlade';  
+                        $set['to'] ='abc123123437@gmail.com'; //收件者;        
+                        $set['to_name'] = $data['name'];
+                        $set['subject'] = '來自'.$data['name'].'意見回饋';
+
+                        unset($data['_token']);
+                        unset($data['code']);
+                        $str ="";
+                        foreach ($data as $key => $value) {
+                            $str.= $key.':'.$value.'<br/>';
+						}
+						$str = str_replace('category','類別',$str);
+						$str = str_replace('suggestion','意見回饋',$str);
+						$str = str_replace('name','姓名',$str);
+						
+// dd($str);
+                        Mail::send( $set['view'], ['str' => $str], function ($m) use ( $set ) {
+                            $m->from( "service@wddgroup.com" , $set['to_name'] );
+							$m->to( $set['to']);
+							$m->subject( $set['subject'] );
+						});
+
+					
+    return response('welcome');
+});
+
+
 Route::group(['prefix'=>'user'],function(){
 	Route::group(['prefix'=>'auth'],function(){
 		Route::get('/sign-up','UserAuthController@signUpPage');
